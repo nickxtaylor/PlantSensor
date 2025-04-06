@@ -49,18 +49,8 @@ void setup() {
 void loop() {
 
   // Read the Analog Input
-  int value = analogRead(moisture_sense_pin);
-  
-  // Print the value to the serial monitor
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Moisture: ");
-  lcd.setCursor(0, 1);
-  lcd.print(value);
-  Serial.print("moisture sense stuff");
-  
-  // Wait for 1 second before the next reading
-  delay(dt);
+  // int value = analogRead(moisture_sense_pin);
+  lcd_print_moisture(analogRead(moisture_sense_pin), dt);
 
   // do DHT stuff
   int readData = DHT.read22(DHT_pinOut);
@@ -79,6 +69,19 @@ void loop() {
 }
 
 // -- FUNCTIONS -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void lcd_print_moisture(int value, float dt) {
+
+  // Print the value to the serial monitor
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Moisture: ");
+  lcd.setCursor(0, 1);
+  lcd.print(value);
+  Serial.print("moisture sense stuff");
+  delay(dt);
+
+}
 
 void lcd_print_temp(float t, float h, float dt) {
 
